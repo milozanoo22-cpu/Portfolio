@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Nombre - Creador de Contenido Visual</title>
+    <meta name="description" content="Creador freelance de videos y fotografías promocionales. Ayudo a marcas a captar más clientes a través de contenido visual impactante.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #f5f5f5;
+            --accent: #ff4d00;
+            --accent-light: #ff6b2c;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --spacing-xl: 8rem;
+            --spacing-lg: 4rem;
+            --spacing-md: 2rem;
+            --spacing-sm: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--secondary);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(245, 245, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 5%;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .hero .accent-text {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: rgba(245, 245, 245, 0.8);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 1s ease-out 0.7s both;
+            box-shadow: 0 10px 30px rgba(255, 77, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 77, 0, 0.4);
+            background: var(--accent-light);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--secondary);
+            opacity: 0.6;
+        }
+
+        /* SECTION STYLES */
+        section {
+            padding: var(--spacing-xl) 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        /* PORTFOLIO GRID */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 16/10;
+            background: var(--primary);
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.02);
+        }
+
+        .portfolio-item img,
+        .portfolio-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover img,
+        .portfolio-item:hover video {
+            transform: scale(1.05);
+            opacity: 0.7;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-overlay p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+        }
+
+        /* SERVICES */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ABOUT SECTION */
+        #sobre-mi {
+            background: var(--primary);
+            color: var(--secondary);
+        }
+
+        #sobre-mi .section-title {
+            color: var(--secondary);
+        }
+
+        #sobre-mi .section-subtitle {
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(245, 245, 245, 0.85);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(245, 245, 245, 0.7);
+            font-size: 0.95rem;
+        }
+
+        /* CONTACT */
+        .contact-content {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            text-align: center;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-method {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        footer p {
+            color: rgba(245, 245, 245, 0.6);
+            font-size: 0.95rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xl: 4rem;
+                --spacing-lg: 3rem;
+            }
+
+            nav {
+                padding: 1.5rem 5%;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* SMOOTH SCROLL */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* LOADING ANIMATION */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body {
+            animation: fadeIn 0.5s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">TU NOMBRE</div>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#portafolio">Portafolio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>
+                Creo contenido que <br>
+                <span class="accent-text">convierte</span>
+            </h1>
+            <p>
+                Videos y fotografías promocionales que captan la atención de tus clientes 
+                y hacen que tus productos destaquen en un mercado saturado.
+            </p>
+            <a href="#contacto" class="cta-button">Trabajemos juntos</a>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portafolio">
+        <h2 class="section-title">Portafolio</h2>
+        <p class="section-subtitle">
+            Algunos de los proyectos que han ayudado a marcas a crecer y captar más clientes.
+        </p>
+        
+        <div class="portfolio-grid">
+            <!-- Portfolio Item 1 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=500&fit=crop" alt="Proyecto 1">
+                <div class="portfolio-overlay">
+                    <h3>Video Promocional - Producto Tech</h3>
+                    <p>Incremento del 45% en conversiones</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 2 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1526666361175-e6d4f235d2a5?w=800&h=500&fit=crop" alt="Proyecto 2">
+                <div class="portfolio-overlay">
+                    <h3>Campaña de Lanzamiento - Restaurante</h3>
+                    <p>+30k visualizaciones en primera semana</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 3 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800&h=500&fit=crop" alt="Proyecto 3">
+                <div class="portfolio-overlay">
+                    <h3>Sesión de Producto - E-commerce</h3>
+                    <p>Mejora del 60% en tasa de clics</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 4 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?w=800&h=500&fit=crop" alt="Proyecto 4">
+                <div class="portfolio-overlay">
+                    <h3>Video Corporativo - Startup</h3>
+                    <p>Captó la atención de inversionistas clave</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 5 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1556912173-46c336c7fd55?w=800&h=500&fit=crop" alt="Proyecto 5">
+                <div class="portfolio-overlay">
+                    <h3>Campaña Social Media - Marca de Moda</h3>
+                    <p>+50k interacciones orgánicas</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 6 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1496024840928-4c417adf211d?w=800&h=500&fit=crop" alt="Proyecto 6">
+                <div class="portfolio-overlay">
+                    <h3>Reel Promocional - Producto Premium</h3>
+                    <p>Duplicó las ventas online en 30 días</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="servicios">
+        <h2 class="section-title">Servicios</h2>
+        <p class="section-subtitle">
+            Soluciones de contenido visual diseñadas para hacer crecer tu negocio.
+        </p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎥</div>
+                <h3>Videos Promocionales</h3>
+                <p>
+                    Videos cortos y dinámicos optimizados para redes sociales y publicidad digital. 
+                    Perfectos para captar atención en los primeros 3 segundos.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📸</div>
+                <h3>Fotografía de Producto</h3>
+                <p>
+                    Sesiones profesionales que destacan los detalles y beneficios de tus productos. 
+                    Ideal para e-commerce y catálogos digitales.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Contenido para Redes</h3>
+                <p>
+                    Reels, Stories y contenido visual optimizado para Instagram, TikTok y Facebook. 
+                    Diseñado para maximizar engagement y alcance orgánico.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <h3>Videos Corporativos</h3>
+                <p>
+                    Presentaciones profesionales de tu empresa, equipo o servicios. 
+                    Perfectos para páginas web, pitches de venta y eventos.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>Campañas Completas</h3>
+                <p>
+                    Estrategia integral de contenido visual para lanzamientos de productos 
+                    o campañas de marketing de corto y mediano plazo.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Edición Express</h3>
+                <p>
+                    Edición rápida de material existente. Dale nueva vida a tu contenido 
+                    con cortes dinámicos, efectos y optimización para diferentes plataformas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="sobre-mi">
+        <h2 class="section-title">Sobre mí</h2>
+        <p class="section-subtitle">
+            Freelancer especializado en crear contenido visual que genera resultados reales.
+        </p>
+
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    Soy creador de contenido visual con experiencia ayudando a pequeñas y medianas 
+                    empresas a destacar en el mercado digital a través de videos y fotografías 
+                    que cuentan historias y conectan emocionalmente con su audiencia.
+                </p>
+                <p>
+                    Mi enfoque está en entender tu producto, tu marca y tus objetivos comerciales 
+                    para crear contenido que no solo se vea bien, sino que convierta espectadores 
+                    en clientes.
+                </p>
+                <p>
+                    Trabajo de forma ágil y flexible, adaptándome a tus tiempos y presupuesto, 
+                    con entrega rápida y comunicación constante durante todo el proceso.
+                </p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Proyectos Completados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Clientes Satisfechos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Años de Experiencia</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Dedicación</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contacto">
+        <h2 class="section-title">Trabajemos juntos</h2>
+        <div class="contact-content">
+            <p class="section-subtitle">
+                ¿Tienes un proyecto en mente? Conversemos sobre cómo puedo ayudarte 
+                a captar más clientes con contenido visual impactante.
+            </p>
+
+            <div class="contact-methods">
+                <a href="mailto:tu@email.com" class="contact-method">
+                    📧 Email
+                </a>
+                <a href="https://wa.me/573001234567" target="_blank" class="contact-method">
+                    💬 WhatsApp
+                </a>
+                <a href="https://instagram.com/tuusuario" target="_blank" class="contact-method">
+                    📱 Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Tu Nombre. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active state to nav on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
